@@ -77,7 +77,7 @@
             "type": "english",
 	    "sentence": "I'm good.",
             "defintions": { "I'm": "cn", "good.": "ʔuʔə́y̕" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","","ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
             "correct": "ʔuʔə́y̕ cn."
           },
           {
@@ -85,14 +85,28 @@
             "sentence": "ʔə́y̕ skʷáči.",
             "defintions": { "ʔə́y̕": "Good", "skʷáči.": "Day" },
             "answers": ["I'm good.","Good day.","You're welcome.","No."],
-            "correct": "Good day,."
+            "correct": "Good day."
           },
           {
             "type": "english",
             "sentence": "Good day.",
             "defintions": { "Good": "ʔə́y̕", "day.": "skʷáči" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","","ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
             "correct": "ʔə́y̕ skʷáči."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̕áy cn ʔuʔ háʔnəŋ.",
+            "defintions": { "ƛ̕áy": "Also", "cn": "I'm", "ʔuʔ": "Just", "háʔnəŋ.": "Thankful" },
+            "answers": ["I'm good.","Good day.","You're welcome.","No."],
+            "correct": "You're welcome."
+          },
+          {
+            "type": "english",
+            "sentence": "You're welcome.",
+            "defintions": { "You're welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
+            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
+            "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
           }
         ]
       },
