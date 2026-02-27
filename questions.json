@@ -95,7 +95,68 @@
             "correct": "ʔə́y̕ skʷáči."
           }
         ]
+      },
+      {
+        "name": "Lesson 3",
+        "questions": [
+          {
+            "type": "Klallam",
+            "sentence": "yəhúməct.",
+            "definitions": { "yəhúməct.": "Take care." },
+            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "correct": "Take care."
+          },
+          {
+            "type": "english",
+            "sentence": "Take care.",
+            "defintions": { "Take care.": "yəhúməct" },
+            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "correct": "yəhúməct."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ʔə́y̕ kʷaʔčíy̕.",
+            "definitions": { "ʔə́y̕": "Good", "kʷaʔčíy̕.": "Morning" },
+            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "correct": "Good morning."
+          },
+          {
+            "type": "english",
+            "sentence": "Good morning.",
+            "defintions": { "Good": "ʔə́y̕", "morning": "kʷaʔčíy̕" },
+            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "correct": "ʔə́y̕ kʷaʔčíy̕."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ʔə́y̕ táŋən.",
+            "definitions": { "ʔə́y̕": "Good", "táŋən.": "Evening" },
+            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "correct": "Good morning."
+          },
+          {
+            "type": "english",
+            "sentence": "Good evening.",
+            "defintions": { "Good": "ʔə́y̕", "evening.": "táŋən" },
+            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "correct": "ʔə́y̕ táŋən."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ʔáwənə nəsx̣čít.",
+            "definitions": { "ʔáwənə": "There Is No", "nə": "My", "sx̣čít": "Knowing" },
+            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "correct": "I don't know."
+          },
+          {
+            "type": "english",
+            "sentence": "I don't know.",
+            "defintions": { "I don't know.": "ʔáwənə nəsx̣čít" },
+            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "correct": "ʔáwənə nəsx̣čít."
+          }
       }
     ]
   }
 ]
+
