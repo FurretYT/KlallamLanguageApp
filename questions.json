@@ -70,43 +70,43 @@
             "type": "Klallam",
             "sentence": "ʔuʔə́y̕ cn.",
             "definitions": { "ʔuʔə́y̕": "Good", "cn.": "I'm" },
-            "answers": ["I'm good.","Good day.","You're welcome.","No."],
+            "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
             "correct": "I'm good."
           },
           {
             "type": "english",
-	    "sentence": "I'm good.",
+            "sentence": "I'm good.",
             "definitions": { "I'm": "cn", "good.": "ʔuʔə́y̕" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
             "correct": "ʔuʔə́y̕ cn."
           },
           {
             "type": "Klallam",
             "sentence": "ʔə́y̕ skʷáči.",
             "definitions": { "ʔə́y̕": "Good", "skʷáči.": "Day" },
-            "answers": ["I'm good.","Good day.","You're welcome.","No."],
+            "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
             "correct": "Good day."
           },
           {
             "type": "english",
             "sentence": "Good day.",
             "definitions": { "Good": "ʔə́y̕", "day.": "skʷáči" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
             "correct": "ʔə́y̕ skʷáči."
           },
           {
             "type": "Klallam",
-            "sentence": "ƛ̕áy cn ʔuʔ háʔnəŋ.",
-            "definitions": { "ƛ̕áy": "Also", "cn": "I'm", "ʔuʔ": "Just", "háʔnəŋ.": "Thankful" },
-            "answers": ["I'm good.","Good day.","You're welcome.","No."],
+            "sentence": "ƛ̕áy cn ʔuʔ háʔnəŋ.",
+            "definitions": { "ƛ̕áy": "Also", "cn": "I'm", "ʔuʔ": "Just", "háʔnəŋ.": "Thankful" },
+            "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
             "correct": "You're welcome."
           },
           {
             "type": "english",
             "sentence": "You're welcome.",
-            "definitions": { "You're welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","ƛ̕áy cn ʔuʔ háʔnəŋ.","ʔáwə"],
-            "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
+            "definitions": { "You're welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
+            "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
           }
         ]
       },
@@ -117,56 +117,56 @@
             "type": "Klallam",
             "sentence": "yəhúməct.",
             "definitions": { "yəhúməct.": "Take care." },
-            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
             "correct": "Take care."
           },
           {
             "type": "english",
             "sentence": "Take care.",
             "definitions": { "Take care.": "yəhúməct" },
-            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "yəhúməct."
           },
           {
             "type": "Klallam",
             "sentence": "ʔə́y̕ kʷaʔčíy̕.",
             "definitions": { "ʔə́y̕": "Good", "kʷaʔčíy̕.": "Morning" },
-            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
             "correct": "Good morning."
           },
           {
             "type": "english",
             "sentence": "Good morning.",
             "definitions": { "Good": "ʔə́y̕", "morning": "kʷaʔčíy̕" },
-            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔə́y̕ kʷaʔčíy̕."
           },
           {
             "type": "Klallam",
             "sentence": "ʔə́y̕ táŋən.",
             "definitions": { "ʔə́y̕": "Good", "táŋən.": "Evening" },
-            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
             "correct": "Good morning."
           },
           {
             "type": "english",
             "sentence": "Good evening.",
             "definitions": { "Good": "ʔə́y̕", "evening.": "táŋən" },
-            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔə́y̕ táŋən."
           },
           {
             "type": "Klallam",
-            "sentence": "ʔáwənə nəsx̣čít.",
+            "sentence": "ʔáwənə nəsx̣čít.",
             "definitions": { "ʔáwənə": "There Is No", "nə": "My", "sx̣čít": "Knowing" },
-            "answers": ["Take care.","Good morning.","Good evening.","I don't know."],
+            "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
             "correct": "I don't know."
           },
           {
             "type": "english",
             "sentence": "I don't know.",
             "definitions": { "I don't know.": "ʔáwənə nəsx̣čít" },
-            "answers": ["yəhúməct.","ʔə́y̕ kʷaʔčíy̕.","ʔə́y̕ táŋən.","ʔáwənə nəsx̣čít."],
+            "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔáwənə nəsx̣čít."
           }
         ]
@@ -174,4 +174,3 @@
     ]
   }
 ]
-
