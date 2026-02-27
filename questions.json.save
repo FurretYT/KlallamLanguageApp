@@ -1,6 +1,6 @@
 [
   {
-    "unit": "Unit 1",
+    "unit": "Unit 1 - Basic Introductions",
     "lessons": [
       {
         "name": "Lesson 1",
@@ -68,32 +68,12 @@
         "questions": [
           {
             "type": "Klallam",
-            "sentence": "ʔuʔə́y̕ cn.",
-            "definitions": { "ʔuʔə́y̕": "Good", "cn.": "I'm" },
-            "answers": ["I'm good.","Good day.","You're welcome.","No."],
-            "correct": "I'm good."
+            "sentence": "PLACEHOLDER9",
+            "definitions": { "PLACEHOLDER9": "Translation9" },
+            "answers": ["Answer1","Answer2","Answer3","Answer4"],
+            "correct": "Answer1"
           },
-          {
-            "type": "english",
-	    "sentence": "I'm good.",
-            "defintions": { "I'm": "cn", "good.": "ʔuʔə́y̕" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","","ʔáwə"],
-            "correct": "ʔuʔə́y̕ cn."
-          },
-          {
-            "type": "Klallam",
-            "sentence": "ʔə́y̕ skʷáči.",
-            "defintions": { "ʔə́y̕": "Good", "skʷáči.": "Day" },
-            "answers": ["I'm good.","Good day.","You're welcome.","No."],
-            "correct": "Good day,."
-          },
-          {
-            "type": "english",
-            "sentence": "Good day.",
-            "defintions": { "Good": "ʔə́y̕", "day.": "skʷáči" },
-            "answers": ["ʔuʔə́y̕ cn.","ʔə́y̕ skʷáči.","","ʔáwə"],
-            "correct": "ʔə́y̕ skʷáči."
-          }
+         [
         ]
       }
     ]
