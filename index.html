@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Klallam Learning App</title>
+<style>
+  body { background-color: #ededed; font-family: "Courier New", monospace; margin: 0; padding: 0; }
+  h1, h2 { text-align: center; margin: 10px 0; }
+  .map { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; justify-items: center; }
+  .unit { border: 2px solid #aaa; border-radius: 8px; padding: 10px; text-align: center; background-color: #fff; display: flex; flex-direction: column; width: 100%; box-sizing: border-box; }
+  .unit-title { font-weight: bold; margin-bottom: 8px; word-break: break-word; }
+  .lesson { border: 1px solid #ccc; border-radius: 5px; padding: 5px; margin: 3px 0; cursor: pointer; background-color: #eee; width: 100%; text-align: center; word-break: break-word; }
+  .lesson.completed { background-color: #cfc; }
+  .lesson.locked { background-color: #ddd; cursor: not-allowed; color: #666; }
+  .question-container { max-width: 600px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); text-align: center; }
+  .words { margin-bottom: 15px; }
+  .words span { margin-right: 5px; cursor: pointer; }
+  .choices { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
+  .choice { padding: 10px 20px; background: #ddd; border-radius: 5px; text-align: center; cursor: pointer; transition: background 0.2s; min-width: 200px; }
+  .choice:hover { background: #ccc; }
+  .progress-bar { height: 20px; background: #ddd; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+  .progress-fill { height: 100%; background: #4caf50; width: 0%; transition: width 0.3s; }
+  .button { padding: 10px 20px; margin: 10px 5px 0 5px; cursor: pointer; border-radius: 5px; border: none; background-color: #888; color: #fff; }
+  .button-container { display: flex; justify-content: space-between; }
+  .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 1000; }
+  .popup { background: #fff; padding: 20px; border-radius: 8px; min-width: 250px; text-align: center; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+  .popup button { margin: 10px 5px 0 5px; }
+</style>
+</head>
+<body>
+
+<h1>Klallam Learning App</h1>
+<div id="map" class="map"></div>
+
+<div id="lesson" class="question-container" style="display:none;">
+  <h2 id="lesson-title"></h2>
+  <div class="words" id="question-text"></div>
+  <div class="choices" id="choices"></div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="button-container">
+    <button class="button" onclick="promptResetProgress()">Reset Progress</button>
+    <button class="button" onclick="backToMap()">Back to Map</button>
+  </div>
+</div>
+
+<div id="popup-overlay" class="popup-overlay">
+  <div class="popup" id="popup-content">
+    <div id="popup-text"></div>
+    <div id="popup-buttons" style="margin-top:10px;"></div>
+  </div>
+</div>
+
+<script>
+// ====================== State ======================
+let units = []; 
+let currentUnitIndex = 0;
+let currentLessonIndex = 0;
+let currentQuestionIndex = 0;
+
+// completedLessons array to track which lessons are done
+let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
+
+// ====================== Elements ======================
+const mapDiv = document.getElementById("map");
+const lessonDiv = document.getElementById("lesson");
+const lessonTitle = document.getElementById("lesson-title");
+const questionText = document.getElementById("question-text");
+const choicesDiv = document.getElementById("choices");
+const progressFill = document.getElementById("progress-fill");
+const popupOverlay = document.getElementById("popup-overlay");
+const popupText = document.getElementById("popup-text");
+const popupButtons = document.getElementById("popup-buttons");
+
+// ====================== Popup ======================
+function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
+  popupText.textContent = message;
+  popupButtons.innerHTML = "";
+  buttons.forEach(btn => {
+    const buttonEl = document.createElement("button");
+    buttonEl.textContent = btn.text;
+    buttonEl.onclick = btn.callback;
+    popupButtons.appendChild(buttonEl);
+  });
+  popupOverlay.style.display = "flex";
+}
+function closePopup() { popupOverlay.style.display = "none"; }
+
+// ====================== Load Questions ======================
+fetch('questions.json')
+  .then(resp => resp.json())
+  .then(data => {
+    units = data;
+    renderMap();
+  })
+  .catch(err => showPopup("Error loading questions: " + err));
+
+// ====================== Map ======================
+function renderMap() {
+  mapDiv.innerHTML = "";
+  units.forEach((unit, uIndex) => {
+    const unitDiv = document.createElement("div");
+    unitDiv.className = "unit";
+    const title = document.createElement("div");
+    title.className = "unit-title";
+    title.textContent = unit.unit;
+    unitDiv.appendChild(title);
+
+    unit.lessons.forEach((lesson, lIndex) => {
+      const lessonDiv = document.createElement("div");
+      lessonDiv.className = "lesson";
+      lessonDiv.textContent = lesson.name;
+
+      const isCompleted = completedLessons.some(l => l.unit === uIndex && l.lesson === lIndex);
+      if(isCompleted) lessonDiv.classList.add("completed");
+
+      // Determine if lesson is locked
+      let locked = false;
+      if(uIndex === 0 && lIndex === 0) locked = false; // first lesson always unlocked
+      else {
+        // check previous lesson
+        let prevUnit = uIndex;
+        let prevLesson = lIndex - 1;
+        if(prevLesson < 0){
+          prevUnit = uIndex - 1;
+          prevLesson = units[prevUnit] ? units[prevUnit].lessons.length - 1 : 0;
+        }
+        locked = !completedLessons.some(l => l.unit === prevUnit && l.lesson === prevLesson);
+      }
+      if(locked) lessonDiv.classList.add("locked");
+      else lessonDiv.onclick = () => startLesson(uIndex, lIndex);
+
+      unitDiv.appendChild(lessonDiv);
+    });
+    mapDiv.appendChild(unitDiv);
+  });
+}
+
+// ====================== Lesson ======================
+function startLesson(unitIdx, lessonIdx) {
+  currentUnitIndex = unitIdx;
+  currentLessonIndex = lessonIdx;
+  currentQuestionIndex = 0;
+  saveProgress();
+  mapDiv.style.display = "none";
+  lessonDiv.style.display = "block";
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
+  const question = lesson.questions[currentQuestionIndex];
+  if (!question) return;
+
+  lessonTitle.textContent = `${units[currentUnitIndex].unit} - ${lesson.name}`;
+  questionText.innerHTML = "";
+
+  question.sentence.split(" ").forEach(word => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.onclick = () => showPopup(question.definitions[word] || "No definition");
+    questionText.appendChild(span);
+    questionText.appendChild(document.createTextNode(" "));
+  });
+
+  const shuffled = question.answers.slice().sort(() => Math.random() - 0.5);
+  choicesDiv.innerHTML = "";
+  shuffled.forEach(ans => {
+    const btn = document.createElement("div");
+    btn.className = "choice";
+    btn.textContent = ans;
+    btn.onclick = () => checkAnswer(ans, question.correct);
+    choicesDiv.appendChild(btn);
+  });
+
+  progressFill.style.width = (currentQuestionIndex / lesson.questions.length) * 100 + "%";
+}
+
+// ====================== Answer Checking ======================
+function checkAnswer(selected, correct) {
+  if (selected === correct) {
+    currentQuestionIndex++;
+    saveProgress();
+    const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
+
+    if (currentQuestionIndex >= lesson.questions.length) {
+      progressFill.style.width = "100%";
+
+      // mark lesson as completed
+      if(!completedLessons.some(l => l.unit === currentUnitIndex && l.lesson === currentLessonIndex)){
+        completedLessons.push({ unit: currentUnitIndex, lesson: currentLessonIndex });
+      }
+      saveProgress();
+      localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+
+      showPopup("Lesson completed!", [
+        { text: "OK", callback: () => { closePopup(); backToMap(); renderMap(); } }
+      ]);
+    } else {
+      renderQuestion();
+    }
+  } else {
+    showPopup("Incorrect! Restarting lesson.", [
+      { text: "OK", callback: () => { 
+          closePopup(); 
+          currentQuestionIndex = 0; 
+          saveProgress(); 
+          renderQuestion(); 
+        } 
+      }
+    ]);
+  }
+}
+
+// ====================== Progress ======================
+function saveProgress() {
+  localStorage.setItem("currentUnitIndex", currentUnitIndex);
+  localStorage.setItem("currentLessonIndex", currentLessonIndex);
+  localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
+  localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+}
+
+// ====================== Reset & Back ======================
+function promptResetProgress() {
+  showPopup("Are you sure you want to reset all progress?", [
+    { text: "Yes", callback: () => { 
+        localStorage.clear(); 
+        currentUnitIndex = 0; 
+        currentLessonIndex = 0; 
+        currentQuestionIndex = 0;
+        completedLessons = [];
+        closePopup(); 
+        renderMap(); 
+        backToMap(); 
+      } 
+    },
+    { text: "Cancel", callback: closePopup }
+  ]);
+}
+
+function backToMap() {
+  lessonDiv.style.display = "none";
+  mapDiv.style.display = "grid";
+}
+</script>
+</body>
+</html>
