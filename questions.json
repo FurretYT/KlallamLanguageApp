@@ -1,6 +1,6 @@
 [
   {
-    "unit": "Unit 1",
+    "unit": "Unit 1 - Basic Phrases",
     "lessons": [
       {
         "name": "Lesson 1",
@@ -168,6 +168,46 @@
             "definitions": { "I don't know.": "ʔáwənə nəsx̣čít" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔáwənə nəsx̣čít."
+          }
+        ]
+      }
+    ]
+  }
+],
+[
+  {
+    "unit": "Unit 2 - Intransitive Pronouns",
+    "lessons": [
+      {
+        "name": "Lesson 1",
+        "questions": [
+          {
+            "type": "Klallam",
+            "sentence": "hiyáʔ cn.",
+            "definitions": { "hiyáʔ": "Go", "cn.": "I'm" },
+            "answers": ["I'm going."],
+            "correct": "I'm going."
+          },
+          {
+            "type": "english",
+            "sentence": "I'm going.",
+            "definitions": { "I'm": "cn", "going.": "hiyáʔ" },
+            "answers": ["hiyáʔ cn."],
+            "correct": "hiyáʔ cn."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "hiyáʔ st.",
+            "definitions": { "hiyáʔ": "Go", "st.": "We" }.
+            "answers": ["We're going."],
+            "correct": "We're going."
+          },
+          {
+            "type": "english",
+            "sentence": "We're going.",
+            "definitions": { "We're": "st", "going.": "hiyáʔ" },
+            "answers": ["hiyáʔ st."],
+            "correct": "hiyáʔ st."
           }
         ]
       }
