@@ -77,7 +77,7 @@
             "type": "english",
             "sentence": "I'm good.",
             "definitions": { "I'm": "cn", "good.": "ʔuʔə́y̕" },
-            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ʔuʔə́y̕ cn."
           },
           {
@@ -91,7 +91,7 @@
             "type": "english",
             "sentence": "Good day.",
             "definitions": { "Good": "ʔə́y̕", "day.": "skʷáči" },
-            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ʔə́y̕ skʷáči."
           },
           {
@@ -105,8 +105,22 @@
             "type": "english",
             "sentence": "You're welcome.",
             "definitions": { "You're welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
-            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə"],
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ʔáwə.",
+            "definitions": { "ʔáwə.": "No" }.
+            "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
+            "correct": "No."
+          },
+          {
+            "type": "english",
+            "sentence": "No.",
+            "definitions": { "No.": "ʔáwə." },
+            "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
+            "correct": "ʔáwə."
           }
         ]
       },
@@ -172,11 +186,9 @@
         ]
       }
     ]
-  }
-],
-[
+  },
   {
-    "unit": "Unit 2 - Intransitive Pronouns",
+    "unit": "Unit 2 - Pronouns",
     "lessons": [
       {
         "name": "Lesson 1",
@@ -198,7 +210,7 @@
           {
             "type": "Klallam",
             "sentence": "hiyáʔ st.",
-            "definitions": { "hiyáʔ": "Go", "st.": "We" }.
+            "definitions": { "hiyáʔ": "Go", "st.": "We're" },
             "answers": ["We're going."],
             "correct": "We're going."
           },
@@ -208,6 +220,122 @@
             "definitions": { "We're": "st", "going.": "hiyáʔ" },
             "answers": ["hiyáʔ st."],
             "correct": "hiyáʔ st."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "hiyáʔ cxʷ.",
+            "definitions": { "hiyáʔ": "Go", "cxʷ.": "You're" },
+            "answers": ["You're going."],
+            "correct": "You're going."
+          },
+          {
+            "type": "english",
+            "sentence": "You're going.",
+            "definitions": { "You're": "cxʷ", "going.": "hiyáʔ" },
+            "answers": ["hiyáʔ cxʷ."],
+            "correct": "hiyáʔ cxʷ."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "hiyáʔ cxʷ hay.",
+            "definitions": { "hiyáʔ": "Go", "cxʷ.": "You're", "hay.": "All" },
+            "answers": ["Y'all're going."],
+            "correct": "Y'all're going."
+          },
+          {
+            "type": "english",
+            "sentence": "Y'all're going.",
+            "definitions": { "Y'all're": "cxʷ hay", "going.": "hiyáʔ" },
+            "answers": ["hiyáʔ cxʷ hay."],
+            "correct": "hiyáʔ cxʷ hay."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "hiyáʔ",
+            "definitions": { "hiyáʔ": "(He/She/It/They) Go" },
+            "answers": ["He's going."],
+            "correct": "He's going."
+          },
+          {
+            "type": "english",
+            "sentence": "She's going.",
+            "definitions": { "She's going.": "hiyáʔ" },
+            "answers": ["hiyáʔ."],
+            "correct": "hiyáʔ."
+          }
+        ]
+      },
+      {
+        "name": "Lesson 2",
+        "questions": [
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̓kʷə́t cn.",
+            "definitions": { "ƛ̓kʷə́t": "Take It/Him/Her/Them", "cn.": "I'm" },
+            "answers": ["I'm taking it."],
+            "correct": "I'm going."
+          },
+          {
+            "type": "english",
+            "sentence": "I'm taking it.",
+            "definitions": { "I'm": "cn", "taking it.": "ƛ̓kʷə́t" },
+            "answers": ["ƛ̓kʷə́t cn."],
+            "correct": "ƛ̓kʷə́t cn."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̓kʷə́t st.",
+            "definitions": { "ƛ̓kʷə́t": "Tale It/Him/Her/Them", "st.": "We're" },
+            "answers": ["We're taking him."],
+            "correct": "We're taking him."
+          },
+          {
+            "type": "english",
+            "sentence": "We're taking him.",
+            "definitions": { "We're": "st", "taking him.": "ƛ̓kʷə́t" },
+            "answers": ["ƛ̓kʷə́t st."],
+            "correct": "ƛ̓kʷə́t st."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̓kʷə́t cxʷ.",
+            "definitions": { "ƛ̓kʷə́t": "Take It/Him/Her/Them", "cxʷ.": "You're" },
+            "answers": ["You're taking her."],
+            "correct": "You're taking her."
+          },
+          {
+            "type": "english",
+            "sentence": "You're taking her.",
+            "definitions": { "You're": "cxʷ", "taking her.": "ƛ̓kʷə́t" },
+            "answers": [ƛ̓kʷə́t cxʷ."],
+            "correct": "ƛ̓kʷə́t cxʷ."
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̓kʷə́t cxʷ hay.",
+            "definitions": { "ƛ̓kʷə́t": "Take It/Him/Her/Them", "cxʷ.": "You're", "hay.": "All" },
+            "answers": ["Y'all're taking them."],
+            "correct": "Y'all're taking them."
+          },
+          {
+            "type": "english",
+            "sentence": "Y'all're taking them.",
+            "definitions": { "Y'all're": "cxʷ hay", "taking them.": "ƛ̓kʷə́t" },
+            "answers": ["ƛ̓kʷə́t cxʷ hay."],
+            "correct": "ƛ̓kʷə́t cxʷ hay."
+          },
+          {
+            "type": "Klallam",
+            "sentence": "ƛ̓kʷə́ts",
+            "definitions": { "ƛ̓kʷə́ts": "(He/She/It/They) Take It/Him/Her/Them" },
+            "answers": ["It's taking it."],
+            "correct": "It's taking it."
+          },
+          {
+            "type": "english",
+            "sentence": "They're taking it.",
+            "definitions": { "They're taking it.": "ƛ̓kʷə́ts" },
+            "answers": ["ƛ̓kʷə́ts."],
+            "correct": "ƛ̓kʷə́ts."
           }
         ]
       }
