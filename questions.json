@@ -307,8 +307,9 @@
             "type": "english",
             "sentence": "You're taking her.",
             "definitions": { "You're": "cxʷ", "taking her.": "ƛ̓kʷə́t" },
-            "answers": [ƛ̓kʷə́t cxʷ."],
+            "answers": ["ƛ̓kʷə́t cxʷ."],
             "correct": "ƛ̓kʷə́t cxʷ."
+          },
           {
             "type": "Klallam",
             "sentence": "ƛ̓kʷə́t cxʷ hay.",
