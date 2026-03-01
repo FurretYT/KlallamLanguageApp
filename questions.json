@@ -111,7 +111,7 @@
           {
             "type": "Klallam",
             "sentence": "ʔáwə.",
-            "definitions": { "ʔáwə.": "No" }.
+            "definitions": { "ʔáwə.": "No" },
             "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
             "correct": "No."
           },
