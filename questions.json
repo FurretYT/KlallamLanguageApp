@@ -146,7 +146,7 @@
           {
             "type": "english",
             "sentence": "Take care.",
-            "definitions": { "Take": "yəhúməct", "care.": "yəhúməct" },
+            "definitions": { "Take": "yəhúməct" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "yəhúməct."
           },
