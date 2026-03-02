@@ -75,7 +75,7 @@
             "sentence": "ʔuʔə́y̕ cn.",
             "definitions": { "ʔuʔə́y̕": "Good", "cn.": "I'm" },
             "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
-            "correct": "I'm good."
+            "correct": "I'm good.",
             "audio": "sounds/imgood.mp3"
           },
           {
@@ -90,7 +90,7 @@
             "sentence": "ʔə́y̕ skʷáči.",
             "definitions": { "ʔə́y̕": "Good", "skʷáči.": "Day" },
             "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
-            "correct": "Good day."
+            "correct": "Good day.",
             "audio": "sounds/goodday.mp3"
           },
           {
@@ -105,7 +105,7 @@
             "sentence": "ƛ̕áy cn ʔuʔ háʔnəŋ.",
             "definitions": { "ƛ̕áy": "Also", "cn": "I'm", "ʔuʔ": "Just", "háʔnəŋ.": "Thankful" },
             "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
-            "correct": "You're welcome."
+            "correct": "You're welcome.",
             "audio": "sounds/yourewelcome.mp3"
           },
           {
@@ -120,7 +120,7 @@
             "sentence": "ʔáwə.",
             "definitions": { "ʔáwə.": "No" },
             "answers": ["I'm good.", "Good day.", "You're welcome.", "No."],
-            "correct": "No."
+            "correct": "No.",
             "audio": "sounds/no.mp3"
           },
           {
