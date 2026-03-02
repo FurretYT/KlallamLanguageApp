@@ -112,7 +112,7 @@
     font-size: 18px;
   }
 
-  #question-text span {
+  #question-text span.word {
     cursor: pointer;
     margin: 0 2px;
     display: inline-block;
@@ -171,10 +171,10 @@
     gap: 10px;
   }
 
-  .sound-btn {
+  .audio-icon {
     cursor: pointer;
-    margin-left: 8px;
     font-size: 20px;
+    margin-right: 8px;
     vertical-align: middle;
   }
 </style>
@@ -251,7 +251,6 @@ function markLessonComplete(unit, lesson) {
   }
 }
 
-// Unlock all lessons (debug mode)
 function unlockAllLessons() {
   completedLessons = [];
   for (let u = 0; u < units.length; u++) {
@@ -373,29 +372,30 @@ function renderQuestion() {
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
-  // Display sentence with clickable words
+  // Add audio icon if question has audio
+  if (question.audio) {
+    const audioIcon = document.createElement("span");
+    audioIcon.textContent = "🔈︎";
+    audioIcon.className = "audio-icon";
+    audioIcon.onclick = () => {
+      const audio = new Audio(question.audio);
+      audio.play();
+    };
+    questionText.appendChild(audioIcon);
+  }
+
+  // Display sentence with clickable words for definitions
   question.sentence.split(" ").forEach(word => {
     const span = document.createElement("span");
     span.textContent = word;
+    span.className = "word";
     span.onclick = () =>
       showPopup(question.definitions[word] || "No definition available.");
     questionText.appendChild(span);
     questionText.appendChild(document.createTextNode(" "));
   });
 
-  // Add sound button if audio exists
-  if (question.audio) {
-    const soundBtn = document.createElement("span");
-    soundBtn.innerHTML = "🔊";
-    soundBtn.className = "sound-btn";
-    soundBtn.onclick = () => {
-      const audio = new Audio(question.audio);
-      audio.play();
-    };
-    questionText.appendChild(soundBtn);
-  }
-
-  // Display multiple choice answers
+  // Multiple-choice answers
   shuffleArray(question.answers).forEach(answer => {
     const btn = document.createElement("div");
     btn.className = "choice";
@@ -414,11 +414,9 @@ function updateProgressBar() {
   progressFill.style.width = percent + "%";
 }
 
-// ====================== Answer Checking ======================
 function checkAnswer(selected, correct) {
   if (selected === correct) {
     currentQuestionIndex++;
-
     const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
 
     if (currentQuestionIndex >= lesson.questions.length) {
@@ -452,7 +450,7 @@ function checkAnswer(selected, correct) {
   }
 }
 
-// ====================== Reset ======================
+// ====================== Reset Progress ======================
 function promptResetProgress() {
   showPopup("Are you sure you want to reset ALL progress?", [
     {
