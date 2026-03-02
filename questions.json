@@ -258,8 +258,8 @@
           },
           {
             "type": "english",
-            "sentence": "She's going.",
-            "definitions": { "She's going.": "hiyáʔ" },
+            "sentence": "He's going.",
+            "definitions": { "He's going.": "hiyáʔ" },
             "answers": ["hiyáʔ."],
             "correct": "hiyáʔ."
           }
@@ -285,14 +285,14 @@
           {
             "type": "Klallam",
             "sentence": "ƛ̓kʷə́t st.",
-            "definitions": { "ƛ̓kʷə́t": "Tale It/Him/Her/Them", "st.": "We're" },
-            "answers": ["We're taking him."],
-            "correct": "We're taking him."
+            "definitions": { "ƛ̓kʷə́t": "Take It/Him/Her/Them", "st.": "We're" },
+            "answers": ["We're taking it."],
+            "correct": "We're taking it."
           },
           {
             "type": "english",
-            "sentence": "We're taking him.",
-            "definitions": { "We're": "st", "taking him.": "ƛ̓kʷə́t" },
+            "sentence": "We're taking it.",
+            "definitions": { "We're": "st", "taking it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t st."],
             "correct": "ƛ̓kʷə́t st."
           },
@@ -300,13 +300,13 @@
             "type": "Klallam",
             "sentence": "ƛ̓kʷə́t cxʷ.",
             "definitions": { "ƛ̓kʷə́t": "Take It/Him/Her/Them", "cxʷ.": "You're" },
-            "answers": ["You're taking her."],
-            "correct": "You're taking her."
+            "answers": ["You're taking it."],
+            "correct": "You're taking it."
           },
           {
             "type": "english",
-            "sentence": "You're taking her.",
-            "definitions": { "You're": "cxʷ", "taking her.": "ƛ̓kʷə́t" },
+            "sentence": "You're taking it.",
+            "definitions": { "You're": "cxʷ", "taking it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cxʷ."],
             "correct": "ƛ̓kʷə́t cxʷ."
           },
@@ -328,8 +328,8 @@
             "type": "Klallam",
             "sentence": "ƛ̓kʷə́ts",
             "definitions": { "ƛ̓kʷə́ts": "(He/She/It/They) Take It/Him/Her/Them" },
-            "answers": ["It's taking it."],
-            "correct": "It's taking it."
+            "answers": ["They're taking it."],
+            "correct": "They're taking it."
           },
           {
             "type": "english",
