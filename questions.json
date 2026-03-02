@@ -25,7 +25,8 @@
             "sentence": "húy̕.",
             "definitions": { "húy̕.": "Goodbye" },
             "answers": ["How are you?", "Goodbye.", "Thank you.", "Yes."],
-            "correct": "Goodbye."
+            "correct": "Goodbye.",
+            "audio": "sounds/goodbye.mp3"
           },
           {
             "type": "english",
@@ -39,7 +40,8 @@
             "sentence": "háʔnəŋ cn.",
             "definitions": { "háʔnəŋ": "Thankful", "cn.": "I am" },
             "answers": ["How are you?", "Goodbye.", "Thank you.", "Yes."],
-            "correct": "Thank you."
+            "correct": "Thank you.",
+            "audio": "sounds/thankyou.mp3"
           },
           {
             "type": "english",
@@ -53,7 +55,8 @@
             "sentence": "m̕.",
             "definitions": { "m̕.": "Yes" },
             "answers": ["How are you?", "Goodbye.", "Thank you.", "Yes."],
-            "correct": "Yes."
+            "correct": "Yes.",
+            "audio": "sounds/yes.mp3"
           },
           {
             "type": "english",
