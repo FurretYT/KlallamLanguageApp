@@ -18,9 +18,7 @@
     text-align: center;
   }
 
-  h1 {
-    margin-top: 0;
-  }
+  h1 { margin-top: 0; }
 
   button {
     cursor: pointer;
@@ -63,10 +61,7 @@
     max-width: 250px;
   }
 
-  .lesson.completed {
-    background: #a5d6a7;
-  }
-
+  .lesson.completed { background: #a5d6a7; }
   .lesson.locked {
     background: #ccc;
     cursor: not-allowed;
@@ -89,7 +84,6 @@
     background: #f44336;
     color: white;
     border: none;
-    font-family: "Courier New", monospace;
   }
 
   #progress-bar {
@@ -137,9 +131,7 @@
     transition: background 0.2s;
   }
 
-  .choice:hover {
-    background: #1976d2;
-  }
+  .choice:hover { background: #1976d2; }
 
   #popup-overlay {
     position: fixed;
@@ -160,7 +152,6 @@
     border-radius: 8px;
     max-width: 300px;
     width: 80%;
-    font-family: "Courier New", monospace;
   }
 
   #popup-buttons {
@@ -207,18 +198,15 @@
 </div>
 
 <script>
-// ====================== App State ======================
 let units = [];
 let currentUnitIndex = 0;
 let currentLessonIndex = 0;
 let currentQuestionIndex = 0;
 let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
 
-// Secret code feature
 let secretCode = "enable debug mode";
 let typedKeys = "";
 
-// ====================== DOM Elements ======================
 const mapDiv = document.getElementById("map");
 const lessonDiv = document.getElementById("lesson");
 const lessonTitle = document.getElementById("lesson-title");
@@ -229,7 +217,6 @@ const popupOverlay = document.getElementById("popup-overlay");
 const popupText = document.getElementById("popup-text");
 const popupButtons = document.getElementById("popup-buttons");
 
-// ====================== Utility ======================
 function shuffleArray(array) {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -262,7 +249,6 @@ function unlockAllLessons() {
   showPopup("Debug mode enabled! All lessons unlocked.");
 }
 
-// ====================== Popup ======================
 function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
   popupText.textContent = message;
   popupButtons.innerHTML = "";
@@ -275,16 +261,12 @@ function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
   popupOverlay.style.display = "flex";
 }
 
-function closePopup() {
-  popupOverlay.style.display = "none";
-}
+function closePopup() { popupOverlay.style.display = "none"; }
 
-// ====================== Load Questions ======================
 async function loadQuestions() {
   try {
     const response = await fetch("questions.json");
-    const data = await response.json();
-    units = data;
+    units = await response.json();
     renderMap();
   } catch (err) {
     showPopup("Error loading questions.json — check JSON formatting.");
@@ -294,7 +276,6 @@ async function loadQuestions() {
 
 window.onload = loadQuestions;
 
-// ====================== Map Rendering ======================
 function renderMap() {
   mapDiv.innerHTML = "";
 
@@ -325,7 +306,6 @@ function renderMap() {
 
 function isUnlocked(uIndex, lIndex) {
   if (uIndex === 0 && lIndex === 0) return true;
-
   let prevUnit = uIndex;
   let prevLesson = lIndex - 1;
   if (prevLesson < 0) {
@@ -336,15 +316,12 @@ function isUnlocked(uIndex, lIndex) {
   return isLessonCompleted(prevUnit, prevLesson);
 }
 
-// ====================== Lesson ======================
 function startLesson(unitIdx, lessonIdx) {
   currentUnitIndex = unitIdx;
   currentLessonIndex = lessonIdx;
   currentQuestionIndex = 0;
-
   mapDiv.style.display = "none";
   lessonDiv.style.display = "flex";
-
   renderQuestion();
 }
 
@@ -357,7 +334,6 @@ function renderQuestion() {
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
-  // Audio icon
   if (question.audio) {
     const audioIcon = document.createElement("span");
     audioIcon.textContent = "🔈︎";
@@ -369,23 +345,17 @@ function renderQuestion() {
     questionText.appendChild(audioIcon);
   }
 
-  // Sentence clickable for definitions (full phrase support)
   const span = document.createElement("span");
   span.textContent = question.sentence;
   span.className = "word";
-  span.style.cursor = "pointer";
   span.onclick = () => {
-    if (question.definitions[question.sentence]) {
-      showPopup(question.definitions[question.sentence]);
-    } else {
-      const words = question.sentence.split(" ");
-      const defs = words.map(w => question.definitions[w] || w).join(" ");
-      showPopup(defs);
+    const exactDefinition = question.definitions[question.sentence];
+    if (exactDefinition) {
+      showPopup(exactDefinition);
     }
   };
   questionText.appendChild(span);
 
-  // Multiple-choice answers
   shuffleArray(question.answers).forEach(answer => {
     const btn = document.createElement("div");
     btn.className = "choice";
@@ -421,7 +391,6 @@ function checkAnswer(selected, correct) {
   }
 }
 
-// ====================== Reset Progress ======================
 function promptResetProgress() {
   showPopup("Are you sure you want to reset ALL progress?", [
     { text: "Yes", callback: () => {
@@ -444,7 +413,6 @@ function backToMap() {
   mapDiv.style.display = "flex";
 }
 
-// ====================== Secret Code Listener ======================
 window.addEventListener("keydown", e => {
   typedKeys += e.key.toLowerCase();
   if (!secretCode.startsWith(typedKeys)) typedKeys = "";
