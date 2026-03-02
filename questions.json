@@ -10,7 +10,8 @@
             "sentence": "sx̣ʷaʔníŋ̕ cxʷ.",
             "definitions": { "sx̣ʷaʔníŋ̕": "How", "cxʷ.": "You" },
             "answers": ["How are you?", "Goodbye.", "Thank you.", "Yes."],
-            "correct": "How are you?"
+            "correct": "How are you?",
+            "audio": "sounds/howareyou.mp3"
           },
           {
             "type": "english",

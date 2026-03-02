@@ -109,12 +109,14 @@
 
   #question-text {
     margin-bottom: 20px;
+    font-size: 18px;
   }
 
   #question-text span {
     cursor: pointer;
     margin: 0 2px;
     display: inline-block;
+    border-bottom: 1px dotted #000;
   }
 
   #choices {
@@ -167,6 +169,13 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+  }
+
+  .sound-btn {
+    cursor: pointer;
+    margin-left: 8px;
+    font-size: 20px;
+    vertical-align: middle;
   }
 </style>
 </head>
@@ -364,6 +373,7 @@ function renderQuestion() {
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
+  // Display sentence with clickable words
   question.sentence.split(" ").forEach(word => {
     const span = document.createElement("span");
     span.textContent = word;
@@ -373,6 +383,19 @@ function renderQuestion() {
     questionText.appendChild(document.createTextNode(" "));
   });
 
+  // Add sound button if audio exists
+  if (question.audio) {
+    const soundBtn = document.createElement("span");
+    soundBtn.innerHTML = "🔊";
+    soundBtn.className = "sound-btn";
+    soundBtn.onclick = () => {
+      const audio = new Audio(question.audio);
+      audio.play();
+    };
+    questionText.appendChild(soundBtn);
+  }
+
+  // Display multiple choice answers
   shuffleArray(question.answers).forEach(answer => {
     const btn = document.createElement("div");
     btn.className = "choice";
