@@ -1,161 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Klallam Learning App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Klallam Learning App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: "Courier New", monospace;
-      margin: 0;
-      padding: 20px;
-      background: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
+<style>
+  body {
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
 
-    h1 {
-      margin-top: 0;
-      text-align: center;
-    }
+  h1 {
+    margin-top: 0;
+  }
 
-    button {
-      cursor: pointer;
-      font-family: "Courier New", monospace;
-    }
+  button {
+    cursor: pointer;
+    font-family: "Courier New", monospace;
+    text-align: center;
+  }
 
-    #map {
-      display: grid;
-      gap: 15px;
-      justify-items: center;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
-    }
+  #map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+  }
 
-    .unit {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      width: 100%;
-    }
+  .unit {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .unit-title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      text-align: center;
-    }
+  .unit-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 
-    .lesson {
-      padding: 8px;
-      margin: 5px 0;
-      background: #e0e0e0;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-      width: 80%;
-    }
+  .lesson {
+    padding: 8px;
+    margin: 5px 0;
+    background: #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    max-width: 250px;
+  }
 
-    .lesson.completed {
-      background: #a5d6a7;
-    }
+  .lesson.completed {
+    background: #a5d6a7;
+  }
 
-    .lesson.locked {
-      background: #ccc;
-      cursor: not-allowed;
-    }
+  .lesson.locked {
+    background: #ccc;
+    cursor: not-allowed;
+  }
 
-    #lesson {
-      display: none;
-      max-width: 600px;
-      width: 100%;
-      text-align: center;
-      margin-top: 20px;
-    }
+  #lesson {
+    display: none;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #back-to-map-btn {
-      margin-bottom: 15px;
-      padding: 8px 15px;
-      border-radius: 5px;
-      background: #f44336;
-      color: white;
-      border: none;
-    }
+  #back-to-map-btn {
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background: #f44336;
+    color: white;
+    border: none;
+    font-family: "Courier New", monospace;
+  }
 
-    #progress-bar {
-      width: 100%;
-      height: 10px;
-      background: #ddd;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      overflow: hidden;
-    }
+  #progress-bar {
+    width: 80%;
+    height: 10px;
+    background: #ddd;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
 
-    #progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #4caf50;
-    }
+  #progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+  }
 
-    #question-text span {
-      cursor: pointer;
-      margin: 0 2px;
-      display: inline-block;
-    }
+  #question-text {
+    margin-bottom: 20px;
+  }
 
-    #choices {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
+  #question-text span {
+    cursor: pointer;
+    margin: 0 2px;
+    display: inline-block;
+  }
 
-    .choice {
-      padding: 12px 20px;
-      background: #2196f3;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 80%;
-      max-width: 300px;
-      text-align: center;
-      transition: background 0.2s;
-    }
+  #choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 
-    .choice:hover {
-      background: #1976d2;
-    }
+  .choice {
+    padding: 12px 20px;
+    background: #2196f3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    max-width: 300px;
+    transition: background 0.2s;
+  }
 
-    #popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.5);
-    }
+  .choice:hover {
+    background: #1976d2;
+  }
 
-    #popup {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      max-width: 300px;
-      font-family: "Courier New", monospace;
-    }
+  #popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+  }
 
-    #popup-buttons button {
-      margin: 5px;
-      padding: 8px 15px;
-      font-family: "Courier New", monospace;
-    }
-  </style>
+  #popup {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    width: 80%;
+    font-family: "Courier New", monospace;
+  }
+
+  #popup-buttons {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+</style>
 </head>
 
 <body>
@@ -318,7 +331,7 @@ function startLesson(unitIdx, lessonIdx) {
   currentQuestionIndex = 0;
 
   mapDiv.style.display = "none";
-  lessonDiv.style.display = "block";
+  lessonDiv.style.display = "flex";
 
   renderQuestion();
 }
@@ -421,7 +434,7 @@ function promptResetProgress() {
 
 function backToMap() {
   lessonDiv.style.display = "none";
-  mapDiv.style.display = "grid";
+  mapDiv.style.display = "flex";
 }
 </script>
 
