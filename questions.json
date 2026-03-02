@@ -16,7 +16,6 @@
           {
             "type": "english",
             "sentence": "How are you?",
-            "definitions": { "How": "sx̣ʷaʔníŋ̕", "are": "cxʷ", "you?": "cxʷ" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "sx̣ʷaʔníŋ̕ cxʷ."
           },
@@ -31,7 +30,6 @@
           {
             "type": "english",
             "sentence": "Goodbye.",
-            "definitions": { "Goodbye.": "húy̕" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "húy̕."
           },
@@ -46,7 +44,6 @@
           {
             "type": "english",
             "sentence": "Thank you.",
-            "definitions": { "Thank": "háʔnəŋ cn", "you.": "háʔnəŋ cn" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "háʔnəŋ cn."
           },
@@ -61,7 +58,6 @@
           {
             "type": "english",
             "sentence": "Yes.",
-            "definitions": { "Yes.": "m̕" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "m̕."
           }
@@ -81,7 +77,6 @@
           {
             "type": "english",
             "sentence": "I'm good.",
-            "definitions": { "I'm": "cn", "good.": "ʔuʔə́y̕" },
             "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ʔuʔə́y̕ cn."
           },
@@ -96,7 +91,6 @@
           {
             "type": "english",
             "sentence": "Good day.",
-            "definitions": { "Good": "ʔə́y̕", "day.": "skʷáči" },
             "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ʔə́y̕ skʷáči."
           },
@@ -111,7 +105,6 @@
           {
             "type": "english",
             "sentence": "You're welcome.",
-            "definitions": { "You're": "ƛ̕áy cn ʔuʔ háʔnəŋ.", "welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
             "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
           },
@@ -126,7 +119,6 @@
           {
             "type": "english",
             "sentence": "No.",
-            "definitions": { "No.": "ʔáwə." },
             "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ʔáwə."
           }
@@ -146,7 +138,6 @@
           {
             "type": "english",
             "sentence": "Take care.",
-            "definitions": { "Take": "yəhúməct" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "yəhúməct."
           },
@@ -161,7 +152,6 @@
           {
             "type": "english",
             "sentence": "Good morning.",
-            "definitions": { "Good": "ʔə́y̕", "morning": "kʷaʔčíy̕" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔə́y̕ kʷaʔčíy̕."
           },
@@ -176,7 +166,6 @@
           {
             "type": "english",
             "sentence": "Good evening.",
-            "definitions": { "Good": "ʔə́y̕", "evening.": "táŋən" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔə́y̕ táŋən."
           },
@@ -191,7 +180,6 @@
           {
             "type": "english",
             "sentence": "I don't know.",
-            "definitions": { "I": "ʔáwənə nəsx̣čít", "don't": "ʔáwənə nəsx̣čít", "know.": "ʔáwənə nəsx̣čít" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔáwənə nəsx̣čít."
           }
@@ -215,7 +203,6 @@
           {
             "type": "english",
             "sentence": "I'm going.",
-            "definitions": { "I'm": "cn", "going.": "hiyáʔ" },
             "answers": ["hiyáʔ cn."],
             "correct": "hiyáʔ cn."
           },
@@ -229,7 +216,6 @@
           {
             "type": "english",
             "sentence": "We're going.",
-            "definitions": { "We're": "st", "going.": "hiyáʔ" },
             "answers": ["hiyáʔ st."],
             "correct": "hiyáʔ st."
           },
@@ -243,7 +229,6 @@
           {
             "type": "english",
             "sentence": "You're going.",
-            "definitions": { "You're": "cxʷ", "going.": "hiyáʔ" },
             "answers": ["hiyáʔ cxʷ."],
             "correct": "hiyáʔ cxʷ."
           },
@@ -257,7 +242,6 @@
           {
             "type": "english",
             "sentence": "Y'all're going.",
-            "definitions": { "Y'all're": "cxʷ hay", "going.": "hiyáʔ" },
             "answers": ["hiyáʔ cxʷ hay."],
             "correct": "hiyáʔ cxʷ hay."
           },
@@ -271,7 +255,6 @@
           {
             "type": "english",
             "sentence": "He's going.",
-            "definitions": { "He's going.": "hiyáʔ" },
             "answers": ["hiyáʔ."],
             "correct": "hiyáʔ."
           }
@@ -290,7 +273,6 @@
           {
             "type": "english",
             "sentence": "I'm taking it.",
-            "definitions": { "I'm": "cn", "taking": "ƛ̓kʷə́t", "it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cn."],
             "correct": "ƛ̓kʷə́t cn."
           },
@@ -304,7 +286,6 @@
           {
             "type": "english",
             "sentence": "We're taking it.",
-            "definitions": { "We're": "st", "taking": "ƛ̓kʷə́t", "it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t st."],
             "correct": "ƛ̓kʷə́t st."
           },
@@ -318,7 +299,6 @@
           {
             "type": "english",
             "sentence": "You're taking it.",
-            "definitions": { "You're": "cxʷ", "taking": "ƛ̓kʷə́t", "it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cxʷ."],
             "correct": "ƛ̓kʷə́t cxʷ."
           },
@@ -332,7 +312,6 @@
           {
             "type": "english",
             "sentence": "Y'all're taking them.",
-            "definitions": { "Y'all're": "cxʷ hay", "taking": "ƛ̓kʷə́t", "it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cxʷ hay."],
             "correct": "ƛ̓kʷə́t cxʷ hay."
           },
@@ -346,7 +325,6 @@
           {
             "type": "english",
             "sentence": "They're taking it.",
-            "definitions": { "They're": "ƛ̓kʷə́ts", "taking": "ƛ̓kʷə́ts", "it.": "ƛ̓kʷə́ts" },
             "answers": ["ƛ̓kʷə́ts."],
             "correct": "ƛ̓kʷə́ts."
           }
