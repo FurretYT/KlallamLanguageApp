@@ -62,10 +62,7 @@
   }
 
   .lesson.completed { background: #a5d6a7; }
-  .lesson.locked {
-    background: #ccc;
-    cursor: not-allowed;
-  }
+  .lesson.locked { background: #ccc; cursor: not-allowed; }
 
   #lesson {
     display: none;
@@ -108,7 +105,7 @@
 
   #question-text span.word {
     cursor: pointer;
-    margin: 0 2px;
+    margin: 0 3px;
     display: inline-block;
     border-bottom: 1px dotted #000;
   }
@@ -157,7 +154,6 @@
   #popup-buttons {
     margin-top: 15px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
@@ -204,9 +200,6 @@ let currentLessonIndex = 0;
 let currentQuestionIndex = 0;
 let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
 
-let secretCode = "enable debug mode";
-let typedKeys = "";
-
 const mapDiv = document.getElementById("map");
 const lessonDiv = document.getElementById("lesson");
 const lessonTitle = document.getElementById("lesson-title");
@@ -217,68 +210,26 @@ const popupOverlay = document.getElementById("popup-overlay");
 const popupText = document.getElementById("popup-text");
 const popupButtons = document.getElementById("popup-buttons");
 
-function shuffleArray(array) {
-  const copy = [...array];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-function isLessonCompleted(unit, lesson) {
-  return completedLessons.some(l => l.unit === unit && l.lesson === lesson);
-}
-
-function markLessonComplete(unit, lesson) {
-  if (!isLessonCompleted(unit, lesson)) {
-    completedLessons.push({ unit, lesson });
-    localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
-  }
-}
-
-function unlockAllLessons() {
-  completedLessons = [];
-  for (let u = 0; u < units.length; u++) {
-    for (let l = 0; l < units[u].lessons.length; l++) {
-      completedLessons.push({ unit: u, lesson: l });
-    }
-  }
-  localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
-  renderMap();
-  showPopup("Debug mode enabled! All lessons unlocked.");
-}
-
-function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
+function showPopup(message) {
   popupText.textContent = message;
-  popupButtons.innerHTML = "";
-  buttons.forEach(btn => {
-    const b = document.createElement("button");
-    b.textContent = btn.text;
-    b.onclick = btn.callback;
-    popupButtons.appendChild(b);
-  });
+  popupButtons.innerHTML = "<button onclick='closePopup()'>OK</button>";
   popupOverlay.style.display = "flex";
 }
 
-function closePopup() { popupOverlay.style.display = "none"; }
+function closePopup() {
+  popupOverlay.style.display = "none";
+}
 
 async function loadQuestions() {
-  try {
-    const response = await fetch("questions.json");
-    units = await response.json();
-    renderMap();
-  } catch (err) {
-    showPopup("Error loading questions.json — check JSON formatting.");
-    console.error(err);
-  }
+  const response = await fetch("questions.json");
+  units = await response.json();
+  renderMap();
 }
 
 window.onload = loadQuestions;
 
 function renderMap() {
   mapDiv.innerHTML = "";
-
   units.forEach((unit, uIndex) => {
     const unitDiv = document.createElement("div");
     unitDiv.className = "unit";
@@ -292,28 +243,12 @@ function renderMap() {
       const lessonBtn = document.createElement("div");
       lessonBtn.className = "lesson";
       lessonBtn.textContent = lesson.name;
-
-      if (isLessonCompleted(uIndex, lIndex)) lessonBtn.classList.add("completed");
-      if (!isUnlocked(uIndex, lIndex)) lessonBtn.classList.add("locked");
-      else lessonBtn.onclick = () => startLesson(uIndex, lIndex);
-
+      lessonBtn.onclick = () => startLesson(uIndex, lIndex);
       unitDiv.appendChild(lessonBtn);
     });
 
     mapDiv.appendChild(unitDiv);
   });
-}
-
-function isUnlocked(uIndex, lIndex) {
-  if (uIndex === 0 && lIndex === 0) return true;
-  let prevUnit = uIndex;
-  let prevLesson = lIndex - 1;
-  if (prevLesson < 0) {
-    prevUnit--;
-    if (prevUnit < 0) return false;
-    prevLesson = units[prevUnit].lessons.length - 1;
-  }
-  return isLessonCompleted(prevUnit, prevLesson);
 }
 
 function startLesson(unitIdx, lessonIdx) {
@@ -328,9 +263,8 @@ function startLesson(unitIdx, lessonIdx) {
 function renderQuestion() {
   const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
   const question = lesson.questions[currentQuestionIndex];
-  if (!question) return;
 
-  lessonTitle.textContent = `${units[currentUnitIndex].unit} - ${lesson.name}`;
+  lessonTitle.textContent = lesson.name;
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
@@ -338,86 +272,47 @@ function renderQuestion() {
     const audioIcon = document.createElement("span");
     audioIcon.textContent = "🔈︎";
     audioIcon.className = "audio-icon";
-    audioIcon.onclick = () => {
-      const audio = new Audio(question.audio);
-      audio.play();
-    };
+    audioIcon.onclick = () => new Audio(question.audio).play();
     questionText.appendChild(audioIcon);
   }
 
-  const span = document.createElement("span");
-  span.textContent = question.sentence;
-  span.className = "word";
-  span.onclick = () => {
-    const exactDefinition = question.definitions[question.sentence];
-    if (exactDefinition) {
-      showPopup(exactDefinition);
-    }
-  };
-  questionText.appendChild(span);
+  // Split sentence and make each EXACT chunk clickable
+  const parts = question.sentence.split(" ");
+  parts.forEach(part => {
+    const span = document.createElement("span");
+    span.textContent = part;
+    span.className = "word";
 
-  shuffleArray(question.answers).forEach(answer => {
+    span.onclick = () => {
+      if (question.definitions.hasOwnProperty(part)) {
+        showPopup(question.definitions[part]);
+      }
+    };
+
+    questionText.appendChild(span);
+  });
+
+  question.answers.forEach(answer => {
     const btn = document.createElement("div");
     btn.className = "choice";
     btn.textContent = answer;
-    btn.onclick = () => checkAnswer(answer, question.correct);
+    btn.onclick = () => {
+      if (answer === question.correct) {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < lesson.questions.length) {
+          renderQuestion();
+        } else {
+          showPopup("Lesson completed!");
+        }
+      } else {
+        showPopup("Incorrect! Restarting lesson.");
+        currentQuestionIndex = 0;
+        renderQuestion();
+      }
+    };
     choicesDiv.appendChild(btn);
   });
-
-  updateProgressBar();
 }
-
-function updateProgressBar() {
-  const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
-  const percent = (currentQuestionIndex / lesson.questions.length) * 100;
-  progressFill.style.width = percent + "%";
-}
-
-function checkAnswer(selected, correct) {
-  if (selected === correct) {
-    currentQuestionIndex++;
-    const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
-    if (currentQuestionIndex >= lesson.questions.length) {
-      progressFill.style.width = "100%";
-      markLessonComplete(currentUnitIndex, currentLessonIndex);
-      showPopup("Lesson completed!", [
-        { text: "Back to Map", callback: () => { closePopup(); backToMap(); renderMap(); } }
-      ]);
-    } else renderQuestion();
-  } else {
-    showPopup("Incorrect! Restarting lesson.", [
-      { text: "Try Again", callback: () => { closePopup(); currentQuestionIndex = 0; renderQuestion(); } }
-    ]);
-  }
-}
-
-function promptResetProgress() {
-  showPopup("Are you sure you want to reset ALL progress?", [
-    { text: "Yes", callback: () => {
-        localStorage.removeItem("completedLessons");
-        completedLessons = [];
-        currentUnitIndex = 0;
-        currentLessonIndex = 0;
-        currentQuestionIndex = 0;
-        closePopup();
-        backToMap();
-        renderMap();
-      }
-    },
-    { text: "Cancel", callback: closePopup }
-  ]);
-}
-
-function backToMap() {
-  lessonDiv.style.display = "none";
-  mapDiv.style.display = "flex";
-}
-
-window.addEventListener("keydown", e => {
-  typedKeys += e.key.toLowerCase();
-  if (!secretCode.startsWith(typedKeys)) typedKeys = "";
-  else if (typedKeys === secretCode) { unlockAllLessons(); typedKeys = ""; }
-});
 </script>
 
 </body>
