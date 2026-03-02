@@ -73,7 +73,7 @@
   }
 
   #lesson {
-    display: none; /* hidden by default */
+    display: none;
     max-width: 600px;
     width: 100%;
     margin-top: 20px;
@@ -212,7 +212,6 @@ let units = [];
 let currentUnitIndex = 0;
 let currentLessonIndex = 0;
 let currentQuestionIndex = 0;
-
 let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
 
 // Secret code feature
@@ -267,14 +266,12 @@ function unlockAllLessons() {
 function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
   popupText.textContent = message;
   popupButtons.innerHTML = "";
-
   buttons.forEach(btn => {
     const b = document.createElement("button");
     b.textContent = btn.text;
     b.onclick = btn.callback;
     popupButtons.appendChild(b);
   });
-
   popupOverlay.style.display = "flex";
 }
 
@@ -315,17 +312,9 @@ function renderMap() {
       lessonBtn.className = "lesson";
       lessonBtn.textContent = lesson.name;
 
-      if (isLessonCompleted(uIndex, lIndex)) {
-        lessonBtn.classList.add("completed");
-      }
-
-      const locked = !isUnlocked(uIndex, lIndex);
-
-      if (locked) {
-        lessonBtn.classList.add("locked");
-      } else {
-        lessonBtn.onclick = () => startLesson(uIndex, lIndex);
-      }
+      if (isLessonCompleted(uIndex, lIndex)) lessonBtn.classList.add("completed");
+      if (!isUnlocked(uIndex, lIndex)) lessonBtn.classList.add("locked");
+      else lessonBtn.onclick = () => startLesson(uIndex, lIndex);
 
       unitDiv.appendChild(lessonBtn);
     });
@@ -339,13 +328,11 @@ function isUnlocked(uIndex, lIndex) {
 
   let prevUnit = uIndex;
   let prevLesson = lIndex - 1;
-
   if (prevLesson < 0) {
     prevUnit--;
     if (prevUnit < 0) return false;
     prevLesson = units[prevUnit].lessons.length - 1;
   }
-
   return isLessonCompleted(prevUnit, prevLesson);
 }
 
@@ -366,13 +353,11 @@ function renderQuestion() {
   const question = lesson.questions[currentQuestionIndex];
   if (!question) return;
 
-  lessonTitle.textContent =
-    `${units[currentUnitIndex].unit} - ${lesson.name}`;
-
+  lessonTitle.textContent = `${units[currentUnitIndex].unit} - ${lesson.name}`;
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
-  // Add audio icon if question has audio
+  // Audio icon
   if (question.audio) {
     const audioIcon = document.createElement("span");
     audioIcon.textContent = "🔈︎";
@@ -384,16 +369,21 @@ function renderQuestion() {
     questionText.appendChild(audioIcon);
   }
 
-  // Display sentence with clickable words for definitions
-  question.sentence.split(" ").forEach(word => {
-    const span = document.createElement("span");
-    span.textContent = word;
-    span.className = "word";
-    span.onclick = () =>
-      showPopup(question.definitions[word] || "No definition available.");
-    questionText.appendChild(span);
-    questionText.appendChild(document.createTextNode(" "));
-  });
+  // Sentence clickable for definitions (full phrase support)
+  const span = document.createElement("span");
+  span.textContent = question.sentence;
+  span.className = "word";
+  span.style.cursor = "pointer";
+  span.onclick = () => {
+    if (question.definitions[question.sentence]) {
+      showPopup(question.definitions[question.sentence]);
+    } else {
+      const words = question.sentence.split(" ");
+      const defs = words.map(w => question.definitions[w] || w).join(" ");
+      showPopup(defs);
+    }
+  };
+  questionText.appendChild(span);
 
   // Multiple-choice answers
   shuffleArray(question.answers).forEach(answer => {
@@ -409,8 +399,7 @@ function renderQuestion() {
 
 function updateProgressBar() {
   const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
-  const percent =
-    (currentQuestionIndex / lesson.questions.length) * 100;
+  const percent = (currentQuestionIndex / lesson.questions.length) * 100;
   progressFill.style.width = percent + "%";
 }
 
@@ -418,34 +407,16 @@ function checkAnswer(selected, correct) {
   if (selected === correct) {
     currentQuestionIndex++;
     const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
-
     if (currentQuestionIndex >= lesson.questions.length) {
       progressFill.style.width = "100%";
       markLessonComplete(currentUnitIndex, currentLessonIndex);
-
       showPopup("Lesson completed!", [
-        {
-          text: "Back to Map",
-          callback: () => {
-            closePopup();
-            backToMap();
-            renderMap();
-          }
-        }
+        { text: "Back to Map", callback: () => { closePopup(); backToMap(); renderMap(); } }
       ]);
-    } else {
-      renderQuestion();
-    }
+    } else renderQuestion();
   } else {
     showPopup("Incorrect! Restarting lesson.", [
-      {
-        text: "Try Again",
-        callback: () => {
-          closePopup();
-          currentQuestionIndex = 0;
-          renderQuestion();
-        }
-      }
+      { text: "Try Again", callback: () => { closePopup(); currentQuestionIndex = 0; renderQuestion(); } }
     ]);
   }
 }
@@ -453,9 +424,7 @@ function checkAnswer(selected, correct) {
 // ====================== Reset Progress ======================
 function promptResetProgress() {
   showPopup("Are you sure you want to reset ALL progress?", [
-    {
-      text: "Yes",
-      callback: () => {
+    { text: "Yes", callback: () => {
         localStorage.removeItem("completedLessons");
         completedLessons = [];
         currentUnitIndex = 0;
@@ -478,12 +447,8 @@ function backToMap() {
 // ====================== Secret Code Listener ======================
 window.addEventListener("keydown", e => {
   typedKeys += e.key.toLowerCase();
-  if (!secretCode.startsWith(typedKeys)) {
-    typedKeys = ""; // reset if wrong
-  } else if (typedKeys === secretCode) {
-    unlockAllLessons();
-    typedKeys = "";
-  }
+  if (!secretCode.startsWith(typedKeys)) typedKeys = "";
+  else if (typedKeys === secretCode) { unlockAllLessons(); typedKeys = ""; }
 });
 </script>
 

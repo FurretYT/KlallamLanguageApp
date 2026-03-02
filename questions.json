@@ -140,7 +140,8 @@
             "sentence": "yəhúməct.",
             "definitions": { "yəhúməct.": "Take care." },
             "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
-            "correct": "Take care."
+            "correct": "Take care.",
+            "audio": "sounds/takecare.mp3"
           },
           {
             "type": "english",
@@ -154,7 +155,8 @@
             "sentence": "ʔə́y̕ kʷaʔčíy̕.",
             "definitions": { "ʔə́y̕": "Good", "kʷaʔčíy̕.": "Morning" },
             "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
-            "correct": "Good morning."
+            "correct": "Good morning.",
+            "audio": "sounds/goodmorning.mp3"
           },
           {
             "type": "english",
@@ -168,7 +170,8 @@
             "sentence": "ʔə́y̕ táŋən.",
             "definitions": { "ʔə́y̕": "Good", "táŋən.": "Evening" },
             "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
-            "correct": "Good evening."
+            "correct": "Good evening.",
+            "audio": "sounds/goodevening.mp3"
           },
           {
             "type": "english",
@@ -182,7 +185,8 @@
             "sentence": "ʔáwənə nəsx̣čít.",
             "definitions": { "ʔáwənə": "There Is No", "nə": "My", "sx̣čít": "Knowing" },
             "answers": ["Take care.", "Good morning.", "Good evening.", "I don't know."],
-            "correct": "I don't know."
+            "correct": "I don't know.",
+            "audio": "sounds/idontknow.mp3"
           },
           {
             "type": "english",
