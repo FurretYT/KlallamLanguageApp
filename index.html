@@ -18,7 +18,9 @@
     text-align: center;
   }
 
-  h1 { margin-top: 0; }
+  h1 {
+    margin-top: 0;
+  }
 
   button {
     cursor: pointer;
@@ -61,8 +63,14 @@
     max-width: 250px;
   }
 
-  .lesson.completed { background: #a5d6a7; }
-  .lesson.locked { background: #ccc; cursor: not-allowed; }
+  .lesson.completed {
+    background: #a5d6a7;
+  }
+
+  .lesson.locked {
+    background: #ccc;
+    cursor: not-allowed;
+  }
 
   #lesson {
     display: none;
@@ -81,6 +89,7 @@
     background: #f44336;
     color: white;
     border: none;
+    font-family: "Courier New", monospace;
   }
 
   #progress-bar {
@@ -105,7 +114,7 @@
 
   #question-text span.word {
     cursor: pointer;
-    margin: 0 3px;
+    margin: 0 2px;
     display: inline-block;
     border-bottom: 1px dotted #000;
   }
@@ -128,7 +137,9 @@
     transition: background 0.2s;
   }
 
-  .choice:hover { background: #1976d2; }
+  .choice:hover {
+    background: #1976d2;
+  }
 
   #popup-overlay {
     position: fixed;
@@ -149,11 +160,13 @@
     border-radius: 8px;
     max-width: 300px;
     width: 80%;
+    font-family: "Courier New", monospace;
   }
 
   #popup-buttons {
     margin-top: 15px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
@@ -194,12 +207,18 @@
 </div>
 
 <script>
+// ====================== App State ======================
 let units = [];
 let currentUnitIndex = 0;
 let currentLessonIndex = 0;
 let currentQuestionIndex = 0;
 let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
 
+// Secret code feature
+let secretCode = "enable debug mode";
+let typedKeys = "";
+
+// ====================== DOM Elements ======================
 const mapDiv = document.getElementById("map");
 const lessonDiv = document.getElementById("lesson");
 const lessonTitle = document.getElementById("lesson-title");
@@ -210,9 +229,49 @@ const popupOverlay = document.getElementById("popup-overlay");
 const popupText = document.getElementById("popup-text");
 const popupButtons = document.getElementById("popup-buttons");
 
-function showPopup(message) {
+// ====================== Utility ======================
+function shuffleArray(array) {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function isLessonCompleted(unit, lesson) {
+  return completedLessons.some(l => l.unit === unit && l.lesson === lesson);
+}
+
+function markLessonComplete(unit, lesson) {
+  if (!isLessonCompleted(unit, lesson)) {
+    completedLessons.push({ unit, lesson });
+    localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+  }
+}
+
+function unlockAllLessons() {
+  completedLessons = [];
+  for (let u = 0; u < units.length; u++) {
+    for (let l = 0; l < units[u].lessons.length; l++) {
+      completedLessons.push({ unit: u, lesson: l });
+    }
+  }
+  localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+  renderMap();
+  showPopup("Debug mode enabled! All lessons unlocked.");
+}
+
+// ====================== Popup ======================
+function showPopup(message, buttons = [{ text: "OK", callback: closePopup }]) {
   popupText.textContent = message;
-  popupButtons.innerHTML = "<button onclick='closePopup()'>OK</button>";
+  popupButtons.innerHTML = "";
+  buttons.forEach(btn => {
+    const b = document.createElement("button");
+    b.textContent = btn.text;
+    b.onclick = btn.callback;
+    popupButtons.appendChild(b);
+  });
   popupOverlay.style.display = "flex";
 }
 
@@ -220,16 +279,25 @@ function closePopup() {
   popupOverlay.style.display = "none";
 }
 
+// ====================== Load Questions ======================
 async function loadQuestions() {
-  const response = await fetch("questions.json");
-  units = await response.json();
-  renderMap();
+  try {
+    const response = await fetch("questions.json");
+    const data = await response.json();
+    units = data;
+    renderMap();
+  } catch (err) {
+    showPopup("Error loading questions.json — check JSON formatting.");
+    console.error(err);
+  }
 }
 
 window.onload = loadQuestions;
 
+// ====================== Map Rendering ======================
 function renderMap() {
   mapDiv.innerHTML = "";
+
   units.forEach((unit, uIndex) => {
     const unitDiv = document.createElement("div");
     unitDiv.className = "unit";
@@ -243,7 +311,11 @@ function renderMap() {
       const lessonBtn = document.createElement("div");
       lessonBtn.className = "lesson";
       lessonBtn.textContent = lesson.name;
-      lessonBtn.onclick = () => startLesson(uIndex, lIndex);
+
+      if (isLessonCompleted(uIndex, lIndex)) lessonBtn.classList.add("completed");
+      if (!isUnlocked(uIndex, lIndex)) lessonBtn.classList.add("locked");
+      else lessonBtn.onclick = () => startLesson(uIndex, lIndex);
+
       unitDiv.appendChild(lessonBtn);
     });
 
@@ -251,68 +323,133 @@ function renderMap() {
   });
 }
 
+function isUnlocked(uIndex, lIndex) {
+  if (uIndex === 0 && lIndex === 0) return true;
+
+  let prevUnit = uIndex;
+  let prevLesson = lIndex - 1;
+  if (prevLesson < 0) {
+    prevUnit--;
+    if (prevUnit < 0) return false;
+    prevLesson = units[prevUnit].lessons.length - 1;
+  }
+  return isLessonCompleted(prevUnit, prevLesson);
+}
+
+// ====================== Lesson ======================
 function startLesson(unitIdx, lessonIdx) {
   currentUnitIndex = unitIdx;
   currentLessonIndex = lessonIdx;
   currentQuestionIndex = 0;
+
   mapDiv.style.display = "none";
   lessonDiv.style.display = "flex";
+
   renderQuestion();
 }
 
 function renderQuestion() {
   const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
   const question = lesson.questions[currentQuestionIndex];
+  if (!question) return;
 
-  lessonTitle.textContent = lesson.name;
+  lessonTitle.textContent = `${units[currentUnitIndex].unit} - ${lesson.name}`;
   questionText.innerHTML = "";
   choicesDiv.innerHTML = "";
 
+  // Audio icon
   if (question.audio) {
     const audioIcon = document.createElement("span");
     audioIcon.textContent = "🔈︎";
     audioIcon.className = "audio-icon";
-    audioIcon.onclick = () => new Audio(question.audio).play();
+    audioIcon.onclick = () => {
+      const audio = new Audio(question.audio);
+      audio.play();
+    };
     questionText.appendChild(audioIcon);
   }
 
-  // Split sentence and make each EXACT chunk clickable
-  const parts = question.sentence.split(" ");
-  parts.forEach(part => {
-    const span = document.createElement("span");
-    span.textContent = part;
-    span.className = "word";
+  // Sentence clickable for definitions (full phrase support)
+  const span = document.createElement("span");
+  span.textContent = question.sentence;
+  span.className = "word";
+  span.style.cursor = "pointer";
+  span.onclick = () => {
+    if (question.definitions[question.sentence]) {
+      showPopup(question.definitions[question.sentence]);
+    } else {
+      const words = question.sentence.split(" ");
+      const defs = words.map(w => question.definitions[w] || w).join(" ");
+      showPopup(defs);
+    }
+  };
+  questionText.appendChild(span);
 
-    span.onclick = () => {
-      if (question.definitions.hasOwnProperty(part)) {
-        showPopup(question.definitions[part]);
-      }
-    };
-
-    questionText.appendChild(span);
-  });
-
-  question.answers.forEach(answer => {
+  // Multiple-choice answers
+  shuffleArray(question.answers).forEach(answer => {
     const btn = document.createElement("div");
     btn.className = "choice";
     btn.textContent = answer;
-    btn.onclick = () => {
-      if (answer === question.correct) {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < lesson.questions.length) {
-          renderQuestion();
-        } else {
-          showPopup("Lesson completed!");
-        }
-      } else {
-        showPopup("Incorrect! Restarting lesson.");
-        currentQuestionIndex = 0;
-        renderQuestion();
-      }
-    };
+    btn.onclick = () => checkAnswer(answer, question.correct);
     choicesDiv.appendChild(btn);
   });
+
+  updateProgressBar();
 }
+
+function updateProgressBar() {
+  const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
+  const percent = (currentQuestionIndex / lesson.questions.length) * 100;
+  progressFill.style.width = percent + "%";
+}
+
+function checkAnswer(selected, correct) {
+  if (selected === correct) {
+    currentQuestionIndex++;
+    const lesson = units[currentUnitIndex].lessons[currentLessonIndex];
+    if (currentQuestionIndex >= lesson.questions.length) {
+      progressFill.style.width = "100%";
+      markLessonComplete(currentUnitIndex, currentLessonIndex);
+      showPopup("Lesson completed!", [
+        { text: "Back to Map", callback: () => { closePopup(); backToMap(); renderMap(); } }
+      ]);
+    } else renderQuestion();
+  } else {
+    showPopup("Incorrect! Restarting lesson.", [
+      { text: "Try Again", callback: () => { closePopup(); currentQuestionIndex = 0; renderQuestion(); } }
+    ]);
+  }
+}
+
+// ====================== Reset Progress ======================
+function promptResetProgress() {
+  showPopup("Are you sure you want to reset ALL progress?", [
+    { text: "Yes", callback: () => {
+        localStorage.removeItem("completedLessons");
+        completedLessons = [];
+        currentUnitIndex = 0;
+        currentLessonIndex = 0;
+        currentQuestionIndex = 0;
+        closePopup();
+        backToMap();
+        renderMap();
+      }
+    },
+    { text: "Cancel", callback: closePopup }
+  ]);
+}
+
+function backToMap() {
+  lessonDiv.style.display = "none";
+  mapDiv.style.display = "flex";
+}
+
+// ====================== Secret Code Listener ======================
+window.addEventListener("keydown", e => {
+  typedKeys += e.key.toLowerCase();
+  if (!secretCode.startsWith(typedKeys)) typedKeys = "";
+  else if (typedKeys === secretCode) { unlockAllLessons(); typedKeys = ""; }
+});
 </script>
 
 </body>
