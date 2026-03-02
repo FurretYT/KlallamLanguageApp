@@ -206,6 +206,10 @@ let currentQuestionIndex = 0;
 
 let completedLessons = JSON.parse(localStorage.getItem("completedLessons") || "[]");
 
+// Secret code feature
+let secretCode = "enable debug mode";
+let typedKeys = "";
+
 // ====================== DOM Elements ======================
 const mapDiv = document.getElementById("map");
 const lessonDiv = document.getElementById("lesson");
@@ -236,6 +240,19 @@ function markLessonComplete(unit, lesson) {
     completedLessons.push({ unit, lesson });
     localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
   }
+}
+
+// Unlock all lessons (debug mode)
+function unlockAllLessons() {
+  completedLessons = [];
+  for (let u = 0; u < units.length; u++) {
+    for (let l = 0; l < units[u].lessons.length; l++) {
+      completedLessons.push({ unit: u, lesson: l });
+    }
+  }
+  localStorage.setItem("completedLessons", JSON.stringify(completedLessons));
+  renderMap();
+  showPopup("Debug mode enabled! All lessons unlocked.");
 }
 
 // ====================== Popup ======================
@@ -331,7 +348,7 @@ function startLesson(unitIdx, lessonIdx) {
   currentQuestionIndex = 0;
 
   mapDiv.style.display = "none";
-  lessonDiv.style.display = "flex"; // only show lesson div now
+  lessonDiv.style.display = "flex";
 
   renderQuestion();
 }
@@ -433,9 +450,20 @@ function promptResetProgress() {
 }
 
 function backToMap() {
-  lessonDiv.style.display = "none"; // hide lesson div completely
-  mapDiv.style.display = "flex";    // show map
+  lessonDiv.style.display = "none";
+  mapDiv.style.display = "flex";
 }
+
+// ====================== Secret Code Listener ======================
+window.addEventListener("keydown", e => {
+  typedKeys += e.key.toLowerCase();
+  if (!secretCode.startsWith(typedKeys)) {
+    typedKeys = ""; // reset if wrong
+  } else if (typedKeys === secretCode) {
+    unlockAllLessons();
+    typedKeys = "";
+  }
+});
 </script>
 
 </body>
