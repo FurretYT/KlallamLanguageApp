@@ -108,7 +108,7 @@
           {
             "type": "english",
             "sentence": "You're welcome.",
-            "definitions": { "You're welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
+            "definitions": { "You're": "ƛ̕áy cn ʔuʔ háʔnəŋ.", "welcome.": "ƛ̕áy cn ʔuʔ háʔnəŋ." },
             "answers": ["ʔuʔə́y̕ cn.", "ʔə́y̕ skʷáči.", "ƛ̕áy cn ʔuʔ háʔnəŋ.", "ʔáwə."],
             "correct": "ƛ̕áy cn ʔuʔ háʔnəŋ."
           },
