@@ -15,8 +15,8 @@
           },
           {
             "type": "english",
-            "sentence": "How are you?",
-            "definitions": { "How": "sx̣ʷaʔníŋ̕", "are you?": "cxʷ" },
+            "sentence": "How are⠀you?",
+            "definitions": { "How": "sx̣ʷaʔníŋ̕", "are⠀you?": "cxʷ" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "sx̣ʷaʔníŋ̕ cxʷ."
           },
@@ -140,8 +140,8 @@
           },
           {
             "type": "english",
-            "sentence": "Take care.",
-            "definitions": { "Take care.": "yəhúməct" },
+            "sentence": "Take⠀care.",
+            "definitions": { "Take⠀care.": "yəhúməct" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "yəhúməct."
           },
@@ -182,8 +182,8 @@
           },
           {
             "type": "english",
-            "sentence": "I don't know.",
-            "definitions": { "I don't know.": "ʔáwənə nəsx̣čít" },
+            "sentence": "I⠀don't⠀know.",
+            "definitions": { "I⠀don't⠀know.": "ʔáwənə nəsx̣čít" },
             "answers": ["yəhúməct.", "ʔə́y̕ kʷaʔčíy̕.", "ʔə́y̕ táŋən.", "ʔáwənə nəsx̣čít."],
             "correct": "ʔáwənə nəsx̣čít."
           }
@@ -242,7 +242,7 @@
           {
             "type": "Klallam",
             "sentence": "hiyáʔ cxʷ hay.",
-            "definitions": { "hiyáʔ": "Go", "cxʷ.": "You're", "hay.": "All" },
+            "definitions": { "hiyáʔ": "Go", "cxʷ": "You're", "hay.": "All" },
             "answers": ["Y'all're going."],
             "correct": "Y'all're going."
           },
@@ -262,8 +262,8 @@
           },
           {
             "type": "english",
-            "sentence": "He's going.",
-            "definitions": { "He's going.": "hiyáʔ" },
+            "sentence": "He's⠀going.",
+            "definitions": { "He's⠀going.": "hiyáʔ" },
             "answers": ["hiyáʔ."],
             "correct": "hiyáʔ."
           }
@@ -281,8 +281,8 @@
           },
           {
             "type": "english",
-            "sentence": "I'm taking it.",
-            "definitions": { "I'm": "cn", "taking it.": "ƛ̓kʷə́t" },
+            "sentence": "I'm taking⠀it.",
+            "definitions": { "I'm": "cn", "taking⠀it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cn."],
             "correct": "ƛ̓kʷə́t cn."
           },
@@ -295,8 +295,8 @@
           },
           {
             "type": "english",
-            "sentence": "We're taking it.",
-            "definitions": { "We're": "st", "taking it.": "ƛ̓kʷə́t" },
+            "sentence": "We're taking⠀it.",
+            "definitions": { "We're": "st", "taking⠀it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t st."],
             "correct": "ƛ̓kʷə́t st."
           },
@@ -309,8 +309,8 @@
           },
           {
             "type": "english",
-            "sentence": "You're taking it.",
-            "definitions": { "You're": "cxʷ", "taking it.": "ƛ̓kʷə́t" },
+            "sentence": "You're taking⠀it.",
+            "definitions": { "You're": "cxʷ", "taking⠀it.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cxʷ."],
             "correct": "ƛ̓kʷə́t cxʷ."
           },
@@ -323,8 +323,8 @@
           },
           {
             "type": "english",
-            "sentence": "Y'all're taking them.",
-            "definitions": { "Y'all're": "cxʷ hay", "taking them.": "ƛ̓kʷə́t" },
+            "sentence": "Y'all're taking⠀them.",
+            "definitions": { "Y'all're": "cxʷ hay", "taking⠀them.": "ƛ̓kʷə́t" },
             "answers": ["ƛ̓kʷə́t cxʷ hay."],
             "correct": "ƛ̓kʷə́t cxʷ hay."
           },
@@ -337,8 +337,8 @@
           },
           {
             "type": "english",
-            "sentence": "They're taking it.",
-            "definitions": { "They're taking it.": "ƛ̓kʷə́ts" },
+            "sentence": "They're⠀taking⠀it.",
+            "definitions": { "They're⠀taking⠀it.": "ƛ̓kʷə́ts" },
             "answers": ["ƛ̓kʷə́ts."],
             "correct": "ƛ̓kʷə́ts."
           }
