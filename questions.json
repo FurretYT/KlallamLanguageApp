@@ -46,7 +46,7 @@
           {
             "type": "english",
             "sentence": "Thank you.",
-            "definitions": { "Thank": "háʔnəŋ", "you.": "cn" },
+            "definitions": { "Thank you.": "háʔnəŋ cn" },
             "answers": ["sx̣ʷaʔníŋ̕ cxʷ.", "húy̕.", "háʔnəŋ cn.", "m̕."],
             "correct": "háʔnəŋ cn."
           },
